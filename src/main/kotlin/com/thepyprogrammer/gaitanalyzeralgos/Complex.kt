@@ -30,9 +30,6 @@ data class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = fa
     var alpha: Double
     var arg: Double
 
-
-
-
     init {
         timesConj = re * re + im * im
         mag = sqrt(timesConj)
