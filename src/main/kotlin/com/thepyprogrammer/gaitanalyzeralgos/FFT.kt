@@ -10,7 +10,7 @@ object FFT {
         else {
             val n = a.size
             println(n)
-            require(n % 2 == 0) { "The Cooley-Tukey com.thepyprogrammer.gaitanalyzeralgos.FFT algorithm only works when the length of the input is a power of 2." }
+            require(n % 2 == 0) { "The Cooley-Tukey FFT algorithm only works when the length of the input is a power of 2." }
 
             var (evens, odds) = Pair(emptyArray<Complex>(), emptyArray<Complex>())
             for (i in a.indices)
