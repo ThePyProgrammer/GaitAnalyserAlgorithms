@@ -22,7 +22,9 @@ object FFT {
                 Pair(base + offset, base - offset)
             }
             var (left, right) = Pair(emptyArray<Complex>(), emptyArray<Complex>())
-            for ((l, r) in pairs) { left += l; right += r }
+            for ((l, r) in pairs) {
+                left += l; right += r
+            }
             left + right
         }
 }
