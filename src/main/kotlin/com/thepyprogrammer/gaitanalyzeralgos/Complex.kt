@@ -24,15 +24,13 @@ data class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = fa
         ))
     }
 
-    var timesConj: Double
-    var mag: Double
+    var timesConj: Double = re * re + im * im
+    var mag: Double = sqrt(timesConj)
     var unit: Complex
     var alpha: Double
     var arg: Double
 
     init {
-        timesConj = re * re + im * im
-        mag = sqrt(timesConj)
         if(!isUnit) unit = if (mag != 0.0) Complex(re / mag, im / mag, true) else Complex(0.0, 0.0, true)
         else unit = this
         alpha = abs(asin(unit.im))
