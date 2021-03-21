@@ -8,4 +8,4 @@ println(arr.size)
 
 val fft = FFT.fft(arr)
 
-println(fft)
+println(fft.joinToString(prefix="{", postfix="}"))
