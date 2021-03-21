@@ -1,3 +1,5 @@
+package com.thepyprogrammer.gaitanalyzeralgos
+
 import kotlin.math.*
 
 class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = false) {
@@ -49,7 +51,7 @@ class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = false) 
         }
     }
 
-    //val conj = Complex(re, -im)
+    //val conj = com.thepyprogrammer.gaitanalyzeralgos.Complex(re, -im)
 
 
     override fun toString() = when {
