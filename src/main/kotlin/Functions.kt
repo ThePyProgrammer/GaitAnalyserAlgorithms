@@ -27,7 +27,7 @@ fun numIntegration(x: Array<Double>): Double {
  * Moore's Algorithm
  * Compute the Freeze Index for a certain axis
  */
-fun fi(data: Array<Double>): Array<Double> {
+fun freeze(data: Array<Double>): Array<Double> {
     var jPos: Int
     val i_max: Int = (data.size / stepSize)
 
@@ -64,13 +64,13 @@ fun fi(data: Array<Double>): Array<Double> {
 /**
  * Computes the Freeze Index for all 3 axes
  */
-fun fIndex(data: Array<Array<Double>>): Array<Array<Double>> {
+fun freezeIndex(data: Array<Array<Double>>): Array<Array<Double>> {
     val fis = mutableListOf<Array<Double>>()
 
     val dat = data.transpose()
 
     for (axis in 1..5) {
-        fis.add(fi(dat[axis]))
+        fis.add(freeze(dat[axis]))
     }
 
     return fis.toTypedArray()
