@@ -2,7 +2,7 @@ package com.thepyprogrammer.gaitanalyzeralgos
 
 import kotlin.math.*
 
-class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = false) {
+data class Complex(val re: Double, val im: Double = 0.0, val isUnit:Boolean = false) {
     infix operator fun plus(x: Complex) = Complex(re + x.re, im + x.im)
     infix operator fun plus(x: Double) = Complex(re + x, im)
     infix operator fun plus(x: Int) = Complex(re + x, im)
