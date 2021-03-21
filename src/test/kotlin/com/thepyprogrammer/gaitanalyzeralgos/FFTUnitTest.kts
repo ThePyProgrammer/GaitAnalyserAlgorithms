@@ -9,7 +9,16 @@ val fft = FFT.fft(arr)
 println(fft.joinToString(separator = ",\n ", prefix="{\n ", postfix="\n}"))
 
 // Answer for the code:
-// 
+//{
+// 3.232,
+// -1.927 + 1.927i,
+// 0.500i,
+// 0.195 + 0.195i,
+// 0.232,
+// 0.195 - 0.195i,
+// -0.000 - 0.500i,
+// -1.927 - 1.927i
+//}
 
 
 // Answer according to Python:
