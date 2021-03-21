@@ -20,7 +20,7 @@ val powerTH = 2.0.pow(11.5)
 fun numIntegration(x: Array<Double>): Double {
     val term1: Double = x.slice(1, x.size).sum()
     val term2: Double = x.slice(0, -1).sum()
-    return (term1 + term2)/(SR*2);
+    return (term1 + term2) / (SR * 2)
 }
 
 /**
@@ -47,12 +47,12 @@ fun fi(data: Array<Double>): Array<Double> {
 
 
         //--- calculate sumLocoFreeze and freezeIndex ---
-        val areaLocoBand = numIntegration(Pyy.slice(f_nr_LBs,f_nr_LBe, 1))
-        val areaFreezeBand = numIntegration(Pyy.slice(f_nr_FBs,f_nr_FBe, 1))
+        val areaLocoBand = numIntegration(Pyy.slice(f_nr_LBs, f_nr_LBe, 1))
+        val areaFreezeBand = numIntegration(Pyy.slice(f_nr_FBs, f_nr_FBe, 1))
 
         // Extension of Baechlin to handle low-energy situations (e.g. standing)
         freezeIndex.add(
-            if(areaFreezeBand + areaLocoBand >= powerTH)
+            if (areaFreezeBand + areaLocoBand >= powerTH)
                 areaFreezeBand / areaLocoBand
             else 0.0
         )
@@ -69,7 +69,7 @@ fun fIndex(data: Array<Array<Double>>): Array<Array<Double>> {
 
     val dat = data.transpose()
 
-    for(axis in 1..5) {
+    for (axis in 1..5) {
         fis.add(fi(dat[axis]))
     }
 
