@@ -1,3 +1,5 @@
+package com.thepyprogrammer.gaitanalyzeralgos
+
 object FFT {
     fun fft(a: Array<Complex>) = _fft(a, Complex(0.0, 2.0), 1.0)
     fun rfft(a: Array<Complex>) = _fft(a, Complex(0.0, -2.0), 2.0)
@@ -7,7 +9,8 @@ object FFT {
             a
         else {
             val n = a.size
-            require(n % 2 == 0) { "The Cooley-Tukey FFT algorithm only works when the length of the input is even." }
+            println(n)
+            require(n % 2 == 0) { "The Cooley-Tukey com.thepyprogrammer.gaitanalyzeralgos.FFT algorithm only works when the length of the input is even." }
 
             var (evens, odds) = Pair(emptyArray<Complex>(), emptyArray<Complex>())
             for (i in a.indices)
