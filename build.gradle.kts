@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains:kotlin-numpy:0.1.5")
     testImplementation(kotlin("test-junit"))
+    testImplementation(kotlin("script-runtime"))
 }
 
 tasks.test {
