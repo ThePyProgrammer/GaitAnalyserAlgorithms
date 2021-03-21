@@ -19,8 +19,11 @@ class Complex(val re: Double, val im: Double = 0.0) {
         re
     )) }
 
-    val mag = sqrt(re*re + im*im)
+    val timesConj = re*re + im*im
+    val mag = sqrt(timesConj)
+
     val unit = if(mag != 0.0) Complex(re/mag, im/mag) else Complex(0.0, 0.0)
+
     val alpha = abs(asin(unit.im))
     val arg = {
         if(im == 0.0 && re == 0.0) 0
