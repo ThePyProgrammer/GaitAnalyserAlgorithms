@@ -1,19 +1,20 @@
-import Constants.NFFT
-import Constants.SR
-import Constants.f_nr_FBe
-import Constants.f_nr_FBs
-import Constants.f_nr_LBe
-import Constants.f_nr_LBs
-import Constants.powerTH
-import Constants.stepSize
-import Constants.windowLength
-import org.jetbrains.numkt.core.*
-import org.jetbrains.numkt.math.*
-import org.jetbrains.numkt.*
-import org.jetbrains.numkt.statistics.mean
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
-@ExperimentalNumkt
 class Functions {
+    private val SR = 64.0
+    private val stepSize = 1
+
+    private val NFFT = 256
+    private val windowLength = 256
+
+    private val f_nr_LBs: Int = (0.5 * NFFT / SR).roundToInt()
+    private val f_nr_LBe: Int = (3 * NFFT / SR).roundToInt()
+    private val f_nr_FBs: Int = (3 * NFFT / SR).roundToInt()
+    private val f_nr_FBe: Int = (8 * NFFT / SR).roundToInt()
+
+    private val powerTH = 2.0.pow(11.5)
+
     /**
      * Do numerical integration of x
      */
@@ -27,36 +28,49 @@ class Functions {
      * Moore's Algorithm
      * Compute the Freeze Index
      */
-    fun fi(data: KtNDArray<Double>) {
-        var jPos: Double
-        val i_max: Int = (data.shape[0] / stepSize).toInt()
+    fun fi(data: Array<Double>): Array<Double> {
+        var jPos: Int
+        val i_max: Int = (data.size / stepSize)
 
-        val time = zeros<Int>(i_max)
-        val freezeIndex = zeros<Double>(i_max)
+        val freezeIndex = mutableListOf<Double>()
         for (i in 0..i_max) {
+            // Time (sample nr) of this window
             val jStart = i * stepSize
             jPos = jStart + windowLength
 
-            // Time (sample nr) of this window
-            time[i] = jStart.toInt()
-
-
             // get the signal in the window
-            var y = data[jStart..jPos]
-            y = y - mean(y)  // make signal zero-mean (mean normalization)
+            val y = data.slice(jStart, jPos).normalise().toComplex()
+            // make signal zero-mean (mean normalization)
 
             // compute FFT (Fast Fourier Transform)
             val Y = FFT.fft(y)
             val Pyy: Array<Double> = Y.timesConj() / NFFT
 
 
-            //--- calculate sumLocoFreeze and freezeIndex --- [f_nr_LBs..f_nr_LBe]
+            //--- calculate sumLocoFreeze and freezeIndex ---
             val areaLocoBand = numIntegration(Pyy.slice(f_nr_LBs,f_nr_LBe, 1))
             val areaFreezeBand = numIntegration(Pyy.slice(f_nr_FBs,f_nr_FBe, 1))
 
             // Extension of Baechlin to handle low-energy situations (e.g. standing)
-            freezeIndex[i] = if(areaFreezeBand + areaLocoBand >= powerTH) areaFreezeBand / areaLocoBand else 0.0
-
+            freezeIndex.add(
+                if(areaFreezeBand + areaLocoBand >= powerTH)
+                    areaFreezeBand / areaLocoBand
+                else 0.0
+            )
         }
+
+        return freezeIndex.toTypedArray()
+    }
+
+    fun fIndex(data: Array<Array<Double>>): Array<Array<Double>> {
+        val FIs = mutableListOf<Array<Double>>()
+
+        val dat = data.transpose()
+
+        for(axis in 1..5) {
+            FIs.add(fi(dat[axis]))
+        }
+
+        return FIs.toTypedArray()
     }
 }
