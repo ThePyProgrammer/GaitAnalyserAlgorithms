@@ -29,7 +29,7 @@ infix operator fun Array<Double>.div(x: Number) = run {
  */
 fun Array<Double>.slice(start: Int, end: Int, step: Int = 1) = run {
     val newList = mutableListOf<Double>()
-    for(i in start..end step step) {
+    for (i in start..end step step) {
         newList.add(this[i])
     }
     newList.toTypedArray()
@@ -78,7 +78,7 @@ fun Array<Double>.toComplex() = run {
  */
 fun zeros(x: Int) = run {
     val newList = mutableListOf<Double>()
-    for(i in 0..x) {
+    for (i in 0..x) {
         newList.add(0.0)
     }
     newList.toTypedArray()
@@ -87,9 +87,9 @@ fun zeros(x: Int) = run {
 /**
  * Get a 2D row x col Zero Double Array
  */
-fun zeros(row:Int, col:Int): Array<Array<Double>> = run {
+fun zeros(row: Int, col: Int): Array<Array<Double>> = run {
     val newList = mutableListOf<Array<Double>>()
-    for(i in 0..row) {
+    for (i in 0..row) {
         newList.add(zeros(col))
     }
     newList.toTypedArray()
@@ -103,8 +103,8 @@ fun Array<Array<Double>>.transpose() = run {
     val numCol = this[0].size
     val array = zeros(numCol, numRow)
 
-    for(i in 0..numRow) {
-        for(j in 0..numCol) {
+    for (i in 0..numRow) {
+        for (j in 0..numCol) {
             array[j][i] = this[i][j]
         }
     }
