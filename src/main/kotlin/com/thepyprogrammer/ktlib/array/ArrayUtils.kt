@@ -1,7 +1,9 @@
-import com.thepyprogrammer.gaitanalyzeralgos.Complex
+package com.thepyprogrammer.ktlib.array
+
+import com.thepyprogrammer.ktlib.math.types.Complex
 
 /**
- * Functions for Double and com.thepyprogrammer.gaitanalyzeralgos.Complex Arrays
+ * Functions for Double and Complex Arrays
  */
 
 /**
@@ -29,8 +31,8 @@ infix operator fun Array<Double>.div(x: Number) = run {
 /**
  * Slice (with start, end and stop) for Double Array
  */
-fun Array<Double>.slice(start: Int, end: Int, step: Int = 1) = run {
-    val newList = mutableListOf<Double>()
+fun Array<Any>.slice(start: Int, end: Int, step: Int = 1) = run {
+    val newList = mutableListOf<Any>()
     for (i in start..end step step) {
         newList.add(this[i])
     }
@@ -65,9 +67,9 @@ fun Array<Double>.normalise() = run {
 }
 
 /**
- * Convert Double Array to generic com.thepyprogrammer.gaitanalyzeralgos.Complex Array
+ * Convert Double Array to generic Complex Array
  */
-fun Array<Double>.toComplex() = run {
+fun Array<Double>.toComplex(): Array<Complex> = run {
     val newList = mutableListOf<Complex>()
     this.forEach {
         newList.add(Complex(it))
@@ -112,3 +114,12 @@ fun Array<Array<Double>>.transpose() = run {
     }
     array
 }
+
+/**
+ * Convert FloatArray to Vector
+ */
+fun FloatArray.toVector() = run {
+    Vector(get(0).toDouble(), get(1).toDouble(), get(2).toDouble())
+}
+
+

@@ -1,4 +1,4 @@
-import com.thepyprogrammer.gaitanalyzeralgos.FFT
+import com.thepyprogrammer.gaitanalyzeralgos.signalprocessing.FFT
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -40,7 +40,7 @@ fun freeze(data: Array<Double>): Array<Double> {
         val y = data.slice(jStart, jPos).normalise().toComplex()
         // make signal zero-mean (mean normalization)
 
-        // compute com.thepyprogrammer.gaitanalyzeralgos.FFT (Fast Fourier Transform)
+        // compute com.thepyprogrammer.gaitanalyzeralgos.signalprocessing.FFT (Fast Fourier Transform)
         val Y = FFT.fft(y)
         val Pyy: Array<Double> = Y.timesConj() / windowLength
 

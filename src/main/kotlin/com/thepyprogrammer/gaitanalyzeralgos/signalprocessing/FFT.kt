@@ -1,4 +1,4 @@
-package com.thepyprogrammer.gaitanalyzeralgos
+package com.thepyprogrammer.gaitanalyzeralgos.signalprocessing
 
 object FFT {
     fun fft(a: Array<Complex>) = _fft(a, Complex(0.0, 2.0), 1.0)
